@@ -61,6 +61,7 @@ var questionContainer = $("#question-span"),
     answerContainer = $("#answer-span"),
     gameContainer = $("#game-span");
 
+//this test function will load the data from the questionBank to the page
 function loadQuestion() {
 
     questionContainer.html("new content");
@@ -69,6 +70,7 @@ function loadQuestion() {
 
 $(document).ready(function() {
 
+	//console.log to refence the data object when the page loads
     console.log(questionBank);
     for (x in questionBank) {
 
