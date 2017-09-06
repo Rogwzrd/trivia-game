@@ -1,0 +1,25 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("../images/ryu-stage-background.jpg");
+    width: 100%;
+    height: auto;
+}
+
+.container {
+	margin-top: 5%;
+}
+
+.blue {
+    background-color: rgba(22, 53, 159, .6);
+    border: thin solid black;
+    border-radius: 4px;
+    height: 80px;
+    color: white;
+    box-shadow: 5px 5px 5px black;
+    margin-top: 5px;
+}
