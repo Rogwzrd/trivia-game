@@ -63,6 +63,10 @@ $(document).ready(function() {
         questionContainer = $("#question-span"),
         answerContainer = $("#answer-span"),
         gameContainer = $("#game-span"),
+        //this variable will hold the time remaining 
+        timeRemaining = 30,
+        //this variable will hold the setInterval
+        intervalId,
         //this variable holds the current level
         currentLevel = 0;
 
@@ -72,6 +76,11 @@ $(document).ready(function() {
         }, 3000)
     };
 
+    function timerFunction() {
+    	timeRemaining--;
+    	$(".timer").text(timeRemaining);
+    }
+
     //this test function will load the data from the questionBank to the page
     function loadQuestion(x) {
         gameContainer.html("<h3>" + questionBank[x].game + "</h3>")
@@ -80,7 +89,15 @@ $(document).ready(function() {
             "<div class='answer' value='a'>" + questionBank[x].answers.a + "</div>" +
             "<div class='answer' value='b'>" + questionBank[x].answers.b + "</div>" +
             "<div class='answer' value='c'>" + questionBank[x].answers.c + "</div>" +
-            "<div class='answer' value='d'>" + questionBank[x].answers.d + "</div>");
+            "<div class='answer' value='d'>" + questionBank[x].answers.d + "</div>" +
+            "<div class='timer'>" + timeRemaining + "</div>"
+            );
+        intervalId = setInterval(function(){
+
+        	timerFunction();
+        	console.log("ONE SECOND HAS PASSED SINCE!")
+        	console.log(timeRemaining);
+        }, 1000);
     }
 
     //console.log to refence the data object when the page loads
@@ -111,9 +128,13 @@ $(document).ready(function() {
             //still in testing
             // mainContainer.html("<img class='loss-image' src='assets/images/guile-loss-image.png' width='250' height='250'>" + "<br>" + "<h1>Try again chief!</h1>" + "<h1>Click on Guile to restart the game!</h1>");
         }
-        clearinterval(intervalFunction);
-
     })
+
+    if (timeRemaining < 0){
+    	console.log('TIME IS UP!');
+    	currentLevel = 0;
+    	loadQuestion(currentLevel);
+    }
     //click on this element when the game ends to call the loadQuestion function    
     // $(document).on("click",".loss-image", function() {
     // 	loadQuestion(currentLevel);
