@@ -1,81 +1,80 @@
-var questionBank = [{
+var questionBank = [
 
-    levelOne: {
+    {
         game: "Devil May Cry",
         question: "What are the names of the protagonist Dante's handguns?",
-        answers: [{
-            answerOne: "Bert & Ernie",
-            answerTwo: "Crime & Punishment",
-            answerThree: "Ebony & Ivory",
-            answerFour: "Ryu & Ken"
-        }]
+        answers: {
+            a: "Bert & Ernie",
+            b: "Crime & Punishment",
+            c: "Ebony & Ivory",
+            d: "Ryu & Ken"
+        },
+        correctAnswer: "c"
     },
-
-    levelTwo: {
+    {
         game: "Mega Man",
         question: "which of the following bosses did not appear in Megaman 2 for the NES?",
-        answers: [{
-            answerOne: "Metal Man",
-            answerTwo: "Flash Man",
-            answerThree: "Wood Man",
-            answerFour: "Cuts Man"
-        }]
+        answers: {
+            a: "Metal Man",
+            b: "Flash Man",
+            c: "Wood Man",
+            d: "Cuts Man"
+        },
+        correctAnswer: "d"
     },
-
-    levelThree: {
+    {
         game: "Residen Evil",
         question: "what is the name of the original virus that turned people into Zombies in Resident Evil?",
-        answers: [{
-            answerOne: "T-Virus",
-            answerTwo: "Progenitor Virus",
-            answerThree: "G-Virus",
-            answerFour: "Demon's Blood"
-        }]
+        answers: {
+            a: "T-Virus",
+            b: "Progenitor Virus",
+            c: "G-Virus",
+            d: "Demon's Blood"
+        },
+        correctAnswer: "a"
     },
-
-    levelFour: {
+    {
         game: "Marve Vs. Capcom",
         question: "Which of the following characters has never appeared in the Marvel Vs Capcom series?",
-        answers: [{
-            answerOne: "Rolento",
-            answerTwo: "Cable",
-            answerThree: "Blackheart",
-            answerFour: "Nemesis"
-        }]
+        answers: {
+            a: "Rolento",
+            b: "Cable",
+            c: "Blackheart",
+            d: "Nemesis"
+        },
+        correctAnswer: "a"
     },
-
-    levelFive: {
+    {
         game: "Street Fighter",
-        question: "Which of the following characters appeared in the game Power Stone?",
-        answers: [{
-            answerOne: "",
-            answerTwo: "",
-            answerThree: "",
-            answerFour: ""
-        }]
+        question: "In the japanese version of Street Fighter 2, what is M. Bison's name?",
+        answers: {
+            a: "Balrog",
+            b: "Derek",
+            c: "F. Bison",
+            d: "Vega"
+        },
+        correctAnswer: "d"
     }
-}];
+];
+//these variables will hold the plaace of our questions, answers, and current game reference
+var questionContainer = $("#question-span"),
+    answerContainer = $("#answer-span"),
+    gameContainer = $("#game-span");
 
-// questionSpace = $(".question-span"),
-// answerOneSpace = $(".answer-one-span"),
-// answerTwoSpace = $(".answer-two-span"),
-// answerThreeSpace = $(".answer-three-span"),
-// answerFourSpace = $(".answer-four-span");
+function loadQuestion() {
 
-
-// function loadQuestion(a) {
-
-//     $(".question-span").html(questionBank[a].question);
-//     $(".answer-one-span").html(questionBank[a].answers[a]);
-//     $(".answer-two-span").html(questionBank[a].answers[a]);
-//     $(".answer-three-span").html(questionBank[a].answers[a]);
-//     $(".answer-four-span").html(questionBank[a].answers[a]);
-// };
+    questionContainer.html("new content");
+    answerContainer.html("please work");
+}
 
 $(document).ready(function() {
 
-    // loadQuestion(0);
+    console.log(questionBank);
+    for (x in questionBank) {
 
-    console.log(questionBank)
+        console.log(questionBank[x])
+
+    }
+    loadQuestion();
 
 })
