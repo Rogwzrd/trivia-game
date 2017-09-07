@@ -76,9 +76,20 @@ $(document).ready(function() {
         }, 3000)
     };
 
+    function timerReset() {
+    	timeRemaining = 30;
+    	clearInterval(intervalId);
+    }
+
     function timerFunction() {
-    	timeRemaining--;
-    	$(".timer").text(timeRemaining);
+        timeRemaining--;
+        $(".timer").text(timeRemaining);
+        if (timeRemaining < 0) {
+        	timerReset();
+            console.log('TIME IS UP!');
+            currentLevel = 0;
+            loadQuestion(currentLevel);
+        }
     }
 
     //this test function will load the data from the questionBank to the page
@@ -91,12 +102,12 @@ $(document).ready(function() {
             "<div class='answer' value='c'>" + questionBank[x].answers.c + "</div>" +
             "<div class='answer' value='d'>" + questionBank[x].answers.d + "</div>" +
             "<div class='timer'>" + timeRemaining + "</div>"
-            );
-        intervalId = setInterval(function(){
+        );
+        intervalId = setInterval(function() {
 
-        	timerFunction();
-        	console.log("ONE SECOND HAS PASSED SINCE!")
-        	console.log(timeRemaining);
+            timerFunction();
+            console.log("ONE SECOND HAS PASSED SINCE!")
+            console.log(timeRemaining);
         }, 1000);
     }
 
@@ -119,8 +130,10 @@ $(document).ready(function() {
         console.log("onclick is recognized");
         if (yourSelection == questionBank[currentLevel].correctAnswer) {
             currentLevel++;
+            timerReset();
             loadQuestion(currentLevel);
         } else {
+        	timerReset();
             currentLevel = 0
             loadQuestion(currentLevel);
 
@@ -130,10 +143,10 @@ $(document).ready(function() {
         }
     })
 
-    if (timeRemaining < 0){
-    	console.log('TIME IS UP!');
-    	currentLevel = 0;
-    	loadQuestion(currentLevel);
+    if (timeRemaining = 0) {
+        console.log('TIME IS UP!');
+        currentLevel = 0;
+        loadQuestion(currentLevel);
     }
     //click on this element when the game ends to call the loadQuestion function    
     // $(document).on("click",".loss-image", function() {

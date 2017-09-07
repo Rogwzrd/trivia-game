@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+.display-none {
+	display: block;
+}
+
+
 body {
     background-image: url("../images/ryu-stage-background.jpg");
     width: 100%;
