@@ -77,20 +77,35 @@ $(document).ready(function() {
     };
 
     function timerReset() {
-    	timeRemaining = 30;
-    	clearInterval(intervalId);
+        timeRemaining = 30;
+        clearInterval(intervalId);
     }
 
     function timerFunction() {
         timeRemaining--;
         $(".timer").text(timeRemaining);
         if (timeRemaining < 0) {
-        	timerReset();
+            timerReset();
             console.log('TIME IS UP!');
-            currentLevel = 0;
-            loadQuestion(currentLevel);
+            buttonReset();
         }
     }
+
+    //this function resets the visual of the game output;
+    //it hides the start game button and shows the game;
+    //when you win it does the revese
+    function buttonReset() {
+        $(".game-space").toggleClass("display-none");
+        $(".start-button").toggleClass("display-none");
+        timerReset();
+        loadQuestion(currentLevel);
+    }
+
+    //The start button initiates the game
+    $(".start-button").on("click", function() {
+        console.log("begone button, summon game!")
+        buttonReset();
+    })
 
     //this test function will load the data from the questionBank to the page
     function loadQuestion(x) {
@@ -104,23 +119,11 @@ $(document).ready(function() {
             "<div class='timer'>" + timeRemaining + "</div>"
         );
         intervalId = setInterval(function() {
-
             timerFunction();
             console.log("ONE SECOND HAS PASSED SINCE!")
             console.log(timeRemaining);
         }, 1000);
     }
-
-    //console.log to refence the data object when the page loads
-    console.log(questionBank);
-    for (x in questionBank) {
-
-        console.log(questionBank[x])
-    }
-
-    //load question on page load
-    loadQuestion(currentLevel);
-    // intervalFunction();
 
     //this determines whether or not an answer is correct onclick;
     //I compare the value of the created answer
@@ -132,8 +135,10 @@ $(document).ready(function() {
             currentLevel++;
             timerReset();
             loadQuestion(currentLevel);
+
+            //when you have answered all the questions correctly
         } else {
-        	timerReset();
+            timerReset();
             currentLevel = 0
             loadQuestion(currentLevel);
 
@@ -143,14 +148,23 @@ $(document).ready(function() {
         }
     })
 
-    if (timeRemaining = 0) {
-        console.log('TIME IS UP!');
-        currentLevel = 0;
-        loadQuestion(currentLevel);
+    //console.log to refence the data object when the page loads
+    console.log(questionBank);
+    for (x in questionBank) {
+
+        console.log(questionBank[x])
     }
+
     //click on this element when the game ends to call the loadQuestion function    
     // $(document).on("click",".loss-image", function() {
     // 	loadQuestion(currentLevel);
     // })
+
+    //this is a working reset to fix an error when the currentLevel variable incremenmts higher than the questionBank.length
+    // if (currentLevel > questionBank.length) {
+    //     currentLevel = 0;
+    //     loadQuestion(0);
+    //     buttonReset();
+    // }
 
 })

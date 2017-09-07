@@ -5,9 +5,11 @@
 }
 
 .display-none {
-	display: block;
+	display: none;
 }
 
+.start-button {
+}
 
 body {
     background-image: url("../images/ryu-stage-background.jpg");
