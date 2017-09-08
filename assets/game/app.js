@@ -103,11 +103,10 @@ $(document).ready(function() {
     //this function resets the visual of the game output;
     //it hides the start game button and shows the game;
     //when you win it does the revese
-    function buttonReset() {
+    function gameStart() {
         $(".game-space").toggleClass("display-none");
         $(".start-button").toggleClass("display-none");
-       	currentLevel = 0;
-        loadQuestion(currentLevel);
+        currentLevel = 0;
     }
 
     //this test function will load the data from the questionBank to the page
@@ -131,7 +130,8 @@ $(document).ready(function() {
         } else {
             gameEndDisplayPage();
             var gameEndTimeout = setTimeout(function() {
-                buttonReset();}, 10000)
+			gameStart();
+            }, 10000)
         }
     }
 
@@ -154,16 +154,17 @@ $(document).ready(function() {
 
     function gameEndDisplayPage() {
         gameContainer.html("<h1> Thanks For Playing")
-        questionContainer.html("<p>Here are your result!<p>" + "<p>You answered " + rightAnswers + " qustions correctly!</p>" + 
-        						"<p>You asnwered " + wrongAnswers + " incorrectly!</p>" + 
-        						"<p>You didn't answer" + unanswered + "qustions!</p>");
+        questionContainer.html("<p>Here are your result!<p>" + "<p>You answered " + rightAnswers + " qustions correctly!</p>" +
+            "<p>You asnwered " + wrongAnswers + " incorrectly!</p>" +
+            "<p>You didn't answer" + unanswered + "qustions!</p>");
         answerContainer.html("<h2>Play again?</h2>");
     }
 
     //The start button initiates the game
     $(".start-button").on("click", function() {
         console.log("begone button, summon game!")
-        buttonReset();
+        gameStart();
+       loadQuestion(currentLevel);
     })
 
     //this determines whether or not an answer is correct onclick;
