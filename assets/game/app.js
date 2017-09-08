@@ -11,29 +11,32 @@ $(document).ready(function() {
                 c: "Ebony & Ivory",
                 d: "Ryu & Ken"
             },
-            correctAnswer: "c"
+            correctAnswer: ["c", "Ebony & Ivory"],
+            gif: "assets/images/devil-may-cry-gif.gif"
         },
         {
             game: "Mega Man",
-            question: "which of the following bosses did not appear in Megaman 2 for the NES?",
+            question: "Which of the following bosses did not appear in Megaman 2 for the NES?",
             answers: {
                 a: "Metal Man",
                 b: "Flash Man",
                 c: "Wood Man",
                 d: "Cuts Man"
             },
-            correctAnswer: "d"
+            correctAnswer: ["d", "Cuts Man"],
+            gif: "assets/images/cuts-man-gif.gif"
         },
         {
             game: "Residen Evil",
-            question: "what is the name of the original virus that turned people into Zombies in Resident Evil?",
+            question: "What is the name of the original virus that turned people into Zombies in Resident Evil?",
             answers: {
                 a: "T-Virus",
                 b: "Progenitor Virus",
                 c: "G-Virus",
                 d: "Demon's Blood"
             },
-            correctAnswer: "a"
+            correctAnswer: ["a", "T-Virus"],
+            gif: "assets/images/resident-evil-gif.gif"
         },
         {
             game: "Marve Vs. Capcom",
@@ -44,7 +47,8 @@ $(document).ready(function() {
                 c: "Blackheart",
                 d: "Nemesis"
             },
-            correctAnswer: "a"
+            correctAnswer: ["a", "Rolento"],
+            gif: "assets/images/rolento-gif.gif"
         },
         {
             game: "Street Fighter",
@@ -55,39 +59,44 @@ $(document).ready(function() {
                 c: "F. Bison",
                 d: "Vega"
             },
-            correctAnswer: "d"
+            correctAnswer: ["d", "Vega"],
+            gif: "assets/images/bison-gif.gif"
         }
     ];
+
     //these variables will hold the plaace of our questions, answers, and current game reference
     var mainContainer = $("#main-game"),
         questionContainer = $("#question-span"),
         answerContainer = $("#answer-span"),
         gameContainer = $("#game-span"),
+
         //this variable will hold the time remaining 
         timeRemaining = 30,
-        //this variable will hold the setInterval
-        intervalId,
+
         //this variable holds the current level
-        currentLevel = 0;
+        currentLevel = 0,
 
-    function intervalFunction() {
-        setInterval(function() {
-            alert("games!")
-        }, 3000)
-    };
+        //these variables will hold the right, wrong, and unanswered variables
+        rightAnswers = 0,
+        wrongAnswers = 0,
+        unanswered = 0;
 
-    function timerReset() {
+
+    //this resets the question timer
+    function questionTimerReset() {
         timeRemaining = 30;
-        clearInterval(intervalId);
+        clearInterval(questionIntervalId);
     }
 
+    //this manages the visuals of the timer
     function timerFunction() {
         timeRemaining--;
         $(".timer").text(timeRemaining);
         if (timeRemaining < 0) {
-            timerReset();
+            incorrectAnswerDisplayPage();
+            currentLevel++;
+            questionTimerReset();
             console.log('TIME IS UP!');
-            buttonReset();
         }
     }
 
@@ -97,8 +106,58 @@ $(document).ready(function() {
     function buttonReset() {
         $(".game-space").toggleClass("display-none");
         $(".start-button").toggleClass("display-none");
-        timerReset();
+       	currentLevel = 0;
         loadQuestion(currentLevel);
+    }
+
+    //this test function will load the data from the questionBank to the page
+    function loadQuestion(x) {
+        if (x < questionBank.length) {
+            gameContainer.html("<h3>" + questionBank[x].game + "</h3>")
+            questionContainer.html(questionBank[x].question);
+            answerContainer.html(
+                "<div class='answer' value='a'>" + questionBank[x].answers.a + "</div>" +
+                "<div class='answer' value='b'>" + questionBank[x].answers.b + "</div>" +
+                "<div class='answer' value='c'>" + questionBank[x].answers.c + "</div>" +
+                "<div class='answer' value='d'>" + questionBank[x].answers.d + "</div>" +
+                "<div class='timer'>" + timeRemaining + "</div>"
+            );
+            //this variable will hold the setInterval
+            questionIntervalId = setInterval(function() {
+                timerFunction();
+                console.log("ONE SECOND HAS PASSED!")
+                console.log(timeRemaining);
+            }, 1000);
+        } else {
+            gameEndDisplayPage();
+            var gameEndTimeout = setTimeout(function() {
+                buttonReset();}, 10000)
+        }
+    }
+
+    //this line holds the code for displaying the answer page based on a correct answer
+    function correctAnswerDisplayPage() {
+        answerContainer.html("<h3>Correct! The answer was " + questionBank[currentLevel].correctAnswer[1] + "!</h3>" + "<img src=" + questionBank[currentLevel].gif + " height ='275'>");
+        answerDisplayTimeoutId = setTimeout(function() {
+            console.log("answerpage has loaded");
+            loadQuestion(currentLevel);
+        }, 5000);
+    }
+    //this line holds the code for displaying the answer page based on an incorrect answer or timeout
+    function incorrectAnswerDisplayPage() {
+        answerContainer.html("<h3> Sorry! The answer was " + questionBank[currentLevel].correctAnswer[1] + "!</h3>" + "<img src=" + questionBank[currentLevel].gif + " height ='275'>");
+        answerDisplayTimeoutId = setTimeout(function() {
+            console.log("answerpage has loaded");
+            loadQuestion(currentLevel);
+        }, 5000);
+    }
+
+    function gameEndDisplayPage() {
+        gameContainer.html("<h1> Thanks For Playing")
+        questionContainer.html("<p>Here are your result!<p>" + "<p>You answered " + rightAnswers + " qustions correctly!</p>" + 
+        						"<p>You asnwered " + wrongAnswers + " incorrectly!</p>" + 
+        						"<p>You didn't answer" + unanswered + "qustions!</p>");
+        answerContainer.html("<h2>Play again?</h2>");
     }
 
     //The start button initiates the game
@@ -107,64 +166,27 @@ $(document).ready(function() {
         buttonReset();
     })
 
-    //this test function will load the data from the questionBank to the page
-    function loadQuestion(x) {
-        gameContainer.html("<h3>" + questionBank[x].game + "</h3>")
-        questionContainer.html(questionBank[x].question);
-        answerContainer.html(
-            "<div class='answer' value='a'>" + questionBank[x].answers.a + "</div>" +
-            "<div class='answer' value='b'>" + questionBank[x].answers.b + "</div>" +
-            "<div class='answer' value='c'>" + questionBank[x].answers.c + "</div>" +
-            "<div class='answer' value='d'>" + questionBank[x].answers.d + "</div>" +
-            "<div class='timer'>" + timeRemaining + "</div>"
-        );
-        intervalId = setInterval(function() {
-            timerFunction();
-            console.log("ONE SECOND HAS PASSED SINCE!")
-            console.log(timeRemaining);
-        }, 1000);
-    }
-
     //this determines whether or not an answer is correct onclick;
-    //I compare the value of the created answer
+    //this line compares the value of the correct answer property in the object representing the current level and the value of the div you click on
     $(document).on("click", ".answer", function() {
         var yourSelection = $(this).attr("value");
         console.log(yourSelection);
         console.log("onclick is recognized");
-        if (yourSelection == questionBank[currentLevel].correctAnswer) {
+
+        if ((yourSelection == questionBank[currentLevel].correctAnswer[0]) && (currentLevel < questionBank.length)) {
+
+            rightAnswers++;
+            correctAnswerDisplayPage();
+            questionTimerReset();
             currentLevel++;
-            timerReset();
-            loadQuestion(currentLevel);
 
-            //when you have answered all the questions correctly
         } else {
-            timerReset();
-            currentLevel = 0
-            loadQuestion(currentLevel);
 
-            //fun styling to show when you lose the game;
-            //still in testing
-            // mainContainer.html("<img class='loss-image' src='assets/images/guile-loss-image.png' width='250' height='250'>" + "<br>" + "<h1>Try again chief!</h1>" + "<h1>Click on Guile to restart the game!</h1>");
+            wrongAnswers++;
+            incorrectAnswerDisplayPage();
+            questionTimerReset();
+            currentLevel++;
         }
     })
-
-    //console.log to refence the data object when the page loads
-    console.log(questionBank);
-    for (x in questionBank) {
-
-        console.log(questionBank[x])
-    }
-
-    //click on this element when the game ends to call the loadQuestion function    
-    // $(document).on("click",".loss-image", function() {
-    // 	loadQuestion(currentLevel);
-    // })
-
-    //this is a working reset to fix an error when the currentLevel variable incremenmts higher than the questionBank.length
-    // if (currentLevel > questionBank.length) {
-    //     currentLevel = 0;
-    //     loadQuestion(0);
-    //     buttonReset();
-    // }
 
 })

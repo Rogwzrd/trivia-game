@@ -5,10 +5,12 @@
 }
 
 .display-none {
-	display: none;
+    display: none;
 }
 
 .start-button {
+	position: relative;
+	top: 250px;
 }
 
 body {
@@ -17,27 +19,28 @@ body {
     height: auto;
 }
 
+.timer {
+	font-size: 24px;
+}
+
 .answer {
-	background-color: darkgrey;
+    background-color: darkgrey;
+    font-size: 24px;
     border: thin solid black;
-    margin: 5px;
+    margin: 20px 5px 0px 20px;
     color: black;
 }
 
 .answer:hover {
-	background-color: darkgrey;
-    border: thin solid black;
-    margin: 1px;
-    box-shadow: 1px 1px 1px black;
-   	cursor: pointer;
-
+    box-shadow: 3px 3px 1px black;
+    cursor: pointer;
 }
 
 .game-body {
     background-color: rgba(22, 53, 159, .6);
     border: thin solid black;
     border-radius: 4px;
-    height: 407px;
+    height: 500px;
     width: 70%;
     color: white;
     margin: 10% 15% 10% 15%;
