@@ -157,7 +157,7 @@ $(document).ready(function() {
         questionContainer.html("<p>Here are your result!<p>" + "<p>You answered " + rightAnswers + " qustions correctly!</p>" +
             "<p>You asnwered " + wrongAnswers + " incorrectly!</p>" +
             "<p>You didn't answer" + unanswered + "qustions!</p>");
-        answerContainer.html("<h2>Play again?</h2>");
+        answerContainer.html("<h2>Hang around to play again!</h2>");
     }
 
     //The start button initiates the game
