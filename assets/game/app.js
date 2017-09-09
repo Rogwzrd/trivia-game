@@ -94,9 +94,9 @@ $(document).ready(function() {
         $(".timer").html("<div class='timer'>Time remaining: " + timeRemaining + "</div>");
         if (timeRemaining < 0) {
             incorrectAnswerDisplayPage();
+            unanswered++;
             currentLevel++;
             questionTimerReset();
-            console.log('TIME IS UP!');
         }
     }
 
@@ -107,6 +107,15 @@ $(document).ready(function() {
         $(".game-space").toggleClass("display-none");
         $(".start-button").toggleClass("display-none");
         currentLevel = 0;
+        loadQuestion(currentLevel);
+    }
+
+    function restartGame() {
+        rightAnswers = 0;
+        wrongAnswers = 0;
+        unanswered = 0;
+        currentLevel = 0;
+        loadQuestion(currentLevel);
     }
 
     //this test function will load the data from the questionBank to the page
@@ -124,14 +133,9 @@ $(document).ready(function() {
             //this variable will hold the setInterval
             questionIntervalId = setInterval(function() {
                 timerFunction();
-                console.log("ONE SECOND HAS PASSED!")
-                console.log(timeRemaining);
             }, 1000);
         } else {
             gameEndDisplayPage();
-            var gameEndTimeout = setTimeout(function() {
-			gameStart();
-            }, 10000)
         }
     }
 
@@ -139,7 +143,6 @@ $(document).ready(function() {
     function correctAnswerDisplayPage() {
         answerContainer.html("<h3>Correct! The answer was " + questionBank[currentLevel].correctAnswer[1] + "!</h3>" + "<img src=" + questionBank[currentLevel].gif + " height ='250'>");
         answerDisplayTimeoutId = setTimeout(function() {
-            console.log("answerpage has loaded");
             loadQuestion(currentLevel);
         }, 5000);
     }
@@ -147,32 +150,31 @@ $(document).ready(function() {
     function incorrectAnswerDisplayPage() {
         answerContainer.html("<h3> Sorry! The answer was " + questionBank[currentLevel].correctAnswer[1] + "!</h3>" + "<img src=" + questionBank[currentLevel].gif + " height ='250'>");
         answerDisplayTimeoutId = setTimeout(function() {
-            console.log("answerpage has loaded");
             loadQuestion(currentLevel);
         }, 5000);
     }
 
     function gameEndDisplayPage() {
         gameContainer.html("<h1> Thanks For Playing")
-        questionContainer.html("<p>Here are your results!<p>" + "<p>You answered " + rightAnswers + " questions correctly!</p>" +
+        questionContainer.html("<p>Here are your results:<p>" + "<p>You answered " + rightAnswers + " questions correctly!</p>" +
             "<p>You answered " + wrongAnswers + " incorrectly!</p>" +
             "<p>" + unanswered + " questions went unanswered!</p>");
-        answerContainer.html("<h2>Hang around to play again!</h2>");
+        answerContainer.empty().append($("<button>").addClass("try-again btn btn-lg btn-primary").text("Try Again?"));
     }
 
     //The start button initiates the game
     $(".start-button").on("click", function() {
-        console.log("begone button, summon game!")
         gameStart();
-       loadQuestion(currentLevel);
+    })
+
+    $(document).on("click", ".try-again", function() {
+        restartGame();
     })
 
     //this determines whether or not an answer is correct onclick;
     //this line compares the value of the correct answer property in the object representing the current level and the value of the div you click on
     $(document).on("click", ".answer", function() {
         var yourSelection = $(this).attr("value");
-        console.log(yourSelection);
-        console.log("onclick is recognized");
 
         if ((yourSelection == questionBank[currentLevel].correctAnswer[0]) && (currentLevel < questionBank.length)) {
 
