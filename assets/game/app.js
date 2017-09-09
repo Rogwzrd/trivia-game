@@ -154,7 +154,7 @@ $(document).ready(function() {
 
     function gameEndDisplayPage() {
         gameContainer.html("<h1> Thanks For Playing")
-        questionContainer.html("<p>Here are your result!<p>" + "<p>You answered " + rightAnswers + " questions correctly!</p>" +
+        questionContainer.html("<p>Here are your results!<p>" + "<p>You answered " + rightAnswers + " questions correctly!</p>" +
             "<p>You answered " + wrongAnswers + " incorrectly!</p>" +
             "<p>" + unanswered + " questions went unanswered!</p>");
         answerContainer.html("<h2>Hang around to play again!</h2>");
