@@ -130,11 +130,14 @@ $(document).ready(function() {
                 "<div class='answer' value='d'>" + questionBank[x].answers.d + "</div>" +
                 "<div class='timer'>Time remaining: " + timeRemaining + "</div>"
             );
+
             //this variable will hold the setInterval
             questionIntervalId = setInterval(function() {
                 timerFunction();
             }, 1000);
+
         } else {
+
             gameEndDisplayPage();
         }
     }
@@ -167,6 +170,7 @@ $(document).ready(function() {
         gameStart();
     })
 
+    //the restart button restarts the game
     $(document).on("click", ".try-again", function() {
         restartGame();
     })
