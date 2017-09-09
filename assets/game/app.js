@@ -91,7 +91,7 @@ $(document).ready(function() {
     //this manages the visuals of the timer
     function timerFunction() {
         timeRemaining--;
-        $(".timer").text(timeRemaining);
+        $(".timer").html("<div class='timer'>Time remaining: " + timeRemaining + "</div>");
         if (timeRemaining < 0) {
             incorrectAnswerDisplayPage();
             currentLevel++;
@@ -112,14 +112,14 @@ $(document).ready(function() {
     //this test function will load the data from the questionBank to the page
     function loadQuestion(x) {
         if (x < questionBank.length) {
-            gameContainer.html("<h3>" + questionBank[x].game + "</h3>")
-            questionContainer.html(questionBank[x].question);
+            gameContainer.html("<h2>" + questionBank[x].game + "</h2>")
+            questionContainer.html("<h3>" + questionBank[x].question + "</h3>");
             answerContainer.html(
                 "<div class='answer' value='a'>" + questionBank[x].answers.a + "</div>" +
                 "<div class='answer' value='b'>" + questionBank[x].answers.b + "</div>" +
                 "<div class='answer' value='c'>" + questionBank[x].answers.c + "</div>" +
                 "<div class='answer' value='d'>" + questionBank[x].answers.d + "</div>" +
-                "<div class='timer'>" + timeRemaining + "</div>"
+                "<div class='timer'>Time remaining: " + timeRemaining + "</div>"
             );
             //this variable will hold the setInterval
             questionIntervalId = setInterval(function() {
@@ -137,7 +137,7 @@ $(document).ready(function() {
 
     //this line holds the code for displaying the answer page based on a correct answer
     function correctAnswerDisplayPage() {
-        answerContainer.html("<h3>Correct! The answer was " + questionBank[currentLevel].correctAnswer[1] + "!</h3>" + "<img src=" + questionBank[currentLevel].gif + " height ='275'>");
+        answerContainer.html("<h3>Correct! The answer was " + questionBank[currentLevel].correctAnswer[1] + "!</h3>" + "<img src=" + questionBank[currentLevel].gif + " height ='250'>");
         answerDisplayTimeoutId = setTimeout(function() {
             console.log("answerpage has loaded");
             loadQuestion(currentLevel);
@@ -145,7 +145,7 @@ $(document).ready(function() {
     }
     //this line holds the code for displaying the answer page based on an incorrect answer or timeout
     function incorrectAnswerDisplayPage() {
-        answerContainer.html("<h3> Sorry! The answer was " + questionBank[currentLevel].correctAnswer[1] + "!</h3>" + "<img src=" + questionBank[currentLevel].gif + " height ='275'>");
+        answerContainer.html("<h3> Sorry! The answer was " + questionBank[currentLevel].correctAnswer[1] + "!</h3>" + "<img src=" + questionBank[currentLevel].gif + " height ='250'>");
         answerDisplayTimeoutId = setTimeout(function() {
             console.log("answerpage has loaded");
             loadQuestion(currentLevel);
