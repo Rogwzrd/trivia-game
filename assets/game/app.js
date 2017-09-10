@@ -9,7 +9,7 @@ $(document).ready(function() {
                 a: "Bert & Ernie",
                 b: "Crime & Punishment",
                 c: "Ebony & Ivory",
-                d: "Ryu & Ken"
+                d: "Hall & Oates"
             },
             correctAnswer: ["c", "Ebony & Ivory"],
             gif: "assets/images/devil-may-cry-gif.gif"

@@ -9,8 +9,8 @@
 }
 
 .start-button {
-	position: relative;
-	top: 250px;
+    position: relative;
+    top: 250px;
 }
 
 body {
@@ -20,7 +20,7 @@ body {
 }
 
 .timer {
-	font-size: 24px;
+    font-size: 24px;
 }
 
 .answer {
@@ -28,6 +28,7 @@ body {
     font-size: 24px;
     border: thin solid black;
     margin: 20px 5px 0px 5px;
+    text-shadow: none;
     color: black;
 }
 
@@ -37,11 +38,12 @@ body {
 }
 
 .game-body {
-    background-color: rgba(22, 53, 159, .6);
+    background-color: rgba(10, 10, 10, .6);
     border: thin solid black;
     border-radius: 4px;
     height: 520px;
     width: 70%;
-    color: white;
+    text-shadow: -1px 0 teal, 0 1px teal, 1px 0 teal, 0 -1px teal;
+    color: gold;
     margin: 10% 15% 10% 15%;
 }
