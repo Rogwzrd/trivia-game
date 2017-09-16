@@ -64,6 +64,9 @@ $(document).ready(function() {
             }
         ],
 
+        //game music variables
+        gameBgMusic = new Audio("assets/audio/gameBgmusic.mp3"),
+        gameStartMusic = new Audio("assets/audio/gameStartMusic.mp3"),
         chunLaugh = new Audio("assets/audio/chunLiLaugh.wav"),
         sagatLaugh = new Audio("assets/audio/sagatLaugh.wav"),
         scream = new Audio("assets/audio/chunLiScream.wav"),
@@ -175,6 +178,7 @@ $(document).ready(function() {
         endGameAudio();
     }
 
+    //this determines the soundbyte that plays when you finish the game
     function endGameAudio() {
         if (rightAnswers == 5) {
             cheer.play();
@@ -183,10 +187,45 @@ $(document).ready(function() {
         }
     }
 
+    //background music function
+    function backgroundAudio() {
+
+        //when the window loads play the start music
+        window.addEventListener("load", function() {
+            gameStartMusic.play();
+
+        });
+
+        //when you press the start button pause the start music and loop the background music
+        $(".start-button").on("click", function() {
+            gameStartMusic.pause();
+            gameBgMusic.addEventListener("ended", function() {
+                this.currentTime = 0;
+                this.play();
+            }, false);
+            gameBgMusic.play();
+
+        })
+    }
+
+
+    //Play music on load!
+    backgroundAudio();
 
     //The start button initiates the game
     $(".start-button").on("click", function() {
         gameStart();
+
+        $(".start-button").on("click", function() {
+            gameStartMusic.pause();
+            gameBgMusic.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+                console.log("the song has restarted")
+            }, false);
+            gameBgMusic.play();
+
+        })
     })
 
     //the restart button restarts the game
@@ -214,5 +253,4 @@ $(document).ready(function() {
             currentLevel++;
         }
     })
-
 })
