@@ -64,19 +64,17 @@ $(document).ready(function() {
             }
         ],
 
-        //game music variables
+        //game music sources
         gameBgMusic = new Audio("assets/audio/gameBgmusic.mp3"),
         gameStartMusic = new Audio("assets/audio/gameStartMusic.mp3"),
         chunLaugh = new Audio("assets/audio/chunLiLaugh.wav"),
         sagatLaugh = new Audio("assets/audio/sagatLaugh.wav"),
-        scream = new Audio("assets/audio/chunLiScream.wav"),
         cheer = new Audio("assets/audio/crowdCheer.wav"),
-        honda = new Audio("assets/audio/eHondaHeadbuttSound.wav"),
         musicloss = new Audio("assets/audio/gameLossSound.wav"),
-        groanLoss = new Audio("assets/audio/genericLossGroan.wav");
+        groanLoss = new Audio("assets/audio/genericLossGroan.wav"),
 
-    //these variables will hold the plaace of our questions, answers, and current game reference
-    var mainContainer = $("#main-game"),
+        //these variables will hold the plaace of our questions, answers, and current game reference
+        mainContainer = $("#main-game"),
         questionContainer = $("#question-span"),
         answerContainer = $("#answer-span"),
         gameContainer = $("#game-span"),
@@ -158,7 +156,7 @@ $(document).ready(function() {
         answerDisplayTimeoutId = setTimeout(function() {
             loadQuestion(currentLevel);
         }, 5000);
-        honda.play();
+        chunLaugh.play();
     }
     //this line holds the code for displaying the answer page based on an incorrect answer or timeout
     function incorrectAnswerDisplayPage() {
@@ -180,9 +178,16 @@ $(document).ready(function() {
 
     //this determines the soundbyte that plays when you finish the game
     function endGameAudio() {
+
         if (rightAnswers == 5) {
+
             cheer.play();
+
         } else {
+
+            gameBgMusic.pause();
+            gameBgMusic.currentTime = 0;
+            musicloss.play();
             groanLoss.play();
         }
     }
@@ -190,47 +195,33 @@ $(document).ready(function() {
     //background music function
     function backgroundAudio() {
 
-        //when the window loads play the start music
-        window.addEventListener("load", function() {
-            gameStartMusic.play();
-
-        });
 
         //when you press the start button pause the start music and loop the background music
-        $(".start-button").on("click", function() {
+        $(document).on("click", ".btn", function() {
             gameStartMusic.pause();
             gameBgMusic.addEventListener("ended", function() {
                 this.currentTime = 0;
                 this.play();
             }, false);
             gameBgMusic.play();
-
         })
     }
 
-
-    //Play music on load!
-    backgroundAudio();
+    //when the window loads play the start music
+    window.addEventListener("load", function() {
+        gameStartMusic.play();
+    });
 
     //The start button initiates the game
     $(".start-button").on("click", function() {
         gameStart();
-
-        $(".start-button").on("click", function() {
-            gameStartMusic.pause();
-            gameBgMusic.addEventListener('ended', function() {
-                this.currentTime = 0;
-                this.play();
-                console.log("the song has restarted")
-            }, false);
-            gameBgMusic.play();
-
-        })
+        backgroundAudio();
     })
 
     //the restart button restarts the game
     $(document).on("click", ".try-again", function() {
         restartGame();
+        backgroundAudio();
     })
 
     //this determines whether or not an answer is correct onclick;
