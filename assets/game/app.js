@@ -65,7 +65,7 @@ $(document).ready(function() {
         ],
 
         //game music sources
-        gameBgMusic = new Audio("assets/audio/gameBgmusic.mp3"),
+        gameBgMusic = new Audio("assets/audio/gameBgMusic.mp3"),
         gameStartMusic = new Audio("assets/audio/gameStartMusic.mp3"),
         chunLaugh = new Audio("assets/audio/chunLiLaugh.wav"),
         sagatLaugh = new Audio("assets/audio/sagatLaugh.wav"),
