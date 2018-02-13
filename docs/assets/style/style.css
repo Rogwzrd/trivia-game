@@ -1,0 +1,49 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.display-none {
+    display: none;
+}
+
+.start-button {
+    position: relative;
+    top: 250px;
+}
+
+body {
+    background-image: url("../images/ryu-stage-background.jpg");
+    width: 100%;
+    height: auto;
+}
+
+.timer {
+    font-size: 24px;
+}
+
+.answer {
+    background-color: darkgrey;
+    font-size: 24px;
+    border: thin solid black;
+    margin: 20px 5px 0px 5px;
+    text-shadow: none;
+    color: black;
+}
+
+.answer:hover {
+    box-shadow: 3px 3px 1px black;
+    cursor: pointer;
+}
+
+.game-body {
+    background-color: rgba(10, 10, 10, .6);
+    border: thin solid black;
+    border-radius: 4px;
+    height: 520px;
+    width: 70%;
+    text-shadow: -1px 0 teal, 0 1px teal, 1px 0 teal, 0 -1px teal;
+    color: gold;
+    margin: 10% 15% 10% 15%;
+}
