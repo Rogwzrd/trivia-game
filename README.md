@@ -1,6 +1,7 @@
 # trivia-game
 
 The goal of this project was to build a trivia style game that utilizes timers and click events to manipulated the sreen and react to the user's inputs. I particularly enjoyed this project because of my investment into my chosen theme. I a huge of Capcom(the Japanese video game company, well known for creating the franchises Street Fighter, Reseident Evil, and Mega Man) games and being able to align my enthusiasm with learning and my love of Capcom's history was a huge boost to my productivity.
+https://capcom-trivia-game.herokuapp.com/home.html
 
 ***Skills I employed:***
 
