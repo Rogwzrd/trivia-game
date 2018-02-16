@@ -1,7 +1,6 @@
 # trivia-game
 
 The goal of this project was to build a trivia style game that utilizes timers and click events to manipulated the sreen and react to the user's inputs. I particularly enjoyed this project because of my investment into my chosen theme. I a huge of Capcom(the Japanese video game company, well known for creating the franchises Street Fighter, Reseident Evil, and Mega Man) games and being able to align my enthusiasm with learning and my love of Capcom's history was a huge boost to my productivity.
-https://capcom-trivia-game.herokuapp.com/home.html
 
 ***Skills I employed:***
 
@@ -13,4 +12,5 @@ https://capcom-trivia-game.herokuapp.com/home.html
 
 ***Objects:*** This was my first huge success using objects to hold and manipulate data. I was able to hold and reproduce all of the the questions, answers, correct answers, and gifs. This made representing each question extremely easy because I only had to creat one function that would loop through the object holding the question data. In the even I want to add more questions to the game all I need to do is add the necessary data to the questions object and the rest of the code knnows what to do.
 
-Give the game a shot! 
+Give the game a shot at this link! 
+https://capcom-trivia-game.herokuapp.com/home.html
